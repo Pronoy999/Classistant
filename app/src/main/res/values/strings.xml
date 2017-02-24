@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Classistant</string>
+    <string name="title_activity_add_subject">AddSubjectActivity</string>
 </resources>

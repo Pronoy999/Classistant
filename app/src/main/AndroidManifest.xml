@@ -15,6 +15,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".StudentRegisterActivity" />
+        <activity android:name=".AddSubjectStudentActivity" />
+        <activity android:name=".AddSubjectTeacherActivity" />
+        <activity android:name=".RoutineActivity" />
+        <activity android:name=".StudentMainActivity" />
+        <activity android:name=".TeacherRegisterActivity" />
+        <activity android:name=".TeacherMainActivity"></activity>
     </application>
 
 </manifest>
