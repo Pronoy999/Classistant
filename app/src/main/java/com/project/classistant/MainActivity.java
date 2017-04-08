@@ -24,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void goToTeacher(){
-        FileC
+
+    }
+    private void goToStudent(){
+
     }
 }
