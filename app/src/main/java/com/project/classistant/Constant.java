@@ -5,4 +5,5 @@ package com.project.classistant;
  */
 
 public abstract class Constant {
+    final static String LoginFile="LoginFile.txt";
 }

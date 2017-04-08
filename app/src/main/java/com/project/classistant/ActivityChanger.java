@@ -16,6 +16,7 @@ public class ActivityChanger {
      * @param context: The current Activity context.
      * @param targetActivity: The activity where you want to go.
      */
+
     public static void changeActivity(Context context,String targetActivity){
         if(targetActivity.equalsIgnoreCase("addSubjectStudentActivity")){
             intent=new Intent(context,AddSubjectStudentActivity.class);
