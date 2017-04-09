@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.project.classistant">
-
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -21,7 +24,7 @@
         <activity android:name=".RoutineActivity" />
         <activity android:name=".StudentMainActivity" />
         <activity android:name=".TeacherRegisterActivity" />
-        <activity android:name=".TeacherMainActivity"></activity>
+        <activity android:name=".TeacherMainActivity"/>
     </application>
 
 </manifest>
