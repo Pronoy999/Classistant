@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Classistant</string>
     <string name="title_activity_add_subject">AddSubjectActivity</string>
+    <string name="otp">Enter the OTP send to your Email ID:</string>
+    <string name="otpConfirm">Confirm</string>
+    <string name="cancel">Cancel</string>
 </resources>
