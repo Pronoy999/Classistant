@@ -43,15 +43,15 @@ public class StudentRegisterActivity extends AppCompatActivity {
             return;
         }
         //send the OTP to the Email Code.
-        showDialog(Constant.OTP_Dialog);
+        showDialog(Constant.OTP_DIALOG);
         if(isEmailValid) {
             Bundle studentDetails = new Bundle();
-            studentDetails.putString(Constant.studentName, name);
-            studentDetails.putString(Constant.studentRoll, roll);
-            studentDetails.putString(Constant.studentEmail, email);
-            studentDetails.putString(Constant.studentStream, stream);
-            studentDetails.putInt(Constant.studentStartYear, startYear);
-            studentDetails.putInt(Constant.studentEndYear, endYear);
+            studentDetails.putString(Constant.STUDENT_NAME, name);
+            studentDetails.putString(Constant.STUDENT_ROLL, roll);
+            studentDetails.putString(Constant.STUDENT_EMAIL, email);
+            studentDetails.putString(Constant.STUDENT_STREAM, stream);
+            studentDetails.putInt(Constant.STUDENT_START_YR, startYear);
+            studentDetails.putInt(Constant.STUDENT_END_YR, endYear);
             FileController fileController = new FileController(getApplicationContext());
             fileController.CreateAccountStudent(studentDetails);
             ActivityChanger.changeActivity(StudentRegisterActivity.this,"AddSubjectStudent");
@@ -79,7 +79,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
 
     @Override
     protected Dialog onCreateDialog(int id) {
-        if(id==Constant.OTP_Dialog){
+        if(id==Constant.OTP_DIALOG){
             AlertDialog.Builder builder=new AlertDialog.Builder(StudentRegisterActivity.this);
             LayoutInflater inflater= StudentRegisterActivity.this.getLayoutInflater();
             builder.setView(inflater.inflate(R.layout.otp_layout,null))
