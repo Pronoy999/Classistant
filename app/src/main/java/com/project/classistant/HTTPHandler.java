@@ -85,6 +85,7 @@ class HTTPHandler {
         BufferedReader reader = new BufferedReader(new InputStreamReader(this.connection.getInputStream(), "UTF-8"));
         StringBuilder retString = new StringBuilder();
         String line;
+
         while ((line = reader.readLine())!=null)
             retString.append(line);
         reader.close();
