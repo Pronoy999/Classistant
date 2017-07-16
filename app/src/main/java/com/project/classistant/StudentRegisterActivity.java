@@ -2,6 +2,7 @@ package com.project.classistant;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,8 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
+import org.json.JSONObject;
+
 public class StudentRegisterActivity extends AppCompatActivity {
-    boolean isEmailValid;
+    boolean isEmailValid;int OTPReceived;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +46,24 @@ public class StudentRegisterActivity extends AppCompatActivity {
             return;
         }
         //send the OTP to the Email Code.
+        try {
+            HTTPHandler httpHandler = new HTTPHandler("http://classistant.esy.es/MyPhpProject2/confirmer.php", 10000, true, true, "POST");
+            ContentValues contentValues=new ContentValues();
+            contentValues.put("id",email);
+            httpHandler.HttpPost(contentValues);
+            String reply=httpHandler.getReplyData();
+            JSONObject jsonObject=new JSONObject(reply);
+            int success=jsonObject.getInt("suc");
+            if(success==0) {
+                Message.toastMessage(getApplicationContext(), "ERROR: " + jsonObject.getString("msg"),"");
+                return;
+            }
+            OTPReceived=jsonObject.getInt("msg");
+            showDialog(Constant.OTP_DIALOG);
+        }
+        catch (Exception e){
+            Message.logMessages("ERROR: ",e.toString());
+        }
         showDialog(Constant.OTP_DIALOG);
         if(isEmailValid) {
             Bundle studentDetails = new Bundle();
@@ -86,8 +107,14 @@ public class StudentRegisterActivity extends AppCompatActivity {
                     .setPositiveButton(R.string.otpConfirm, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            //Check the validity of OTP
-                            isEmailValid=true;
+                            EditText otpText=(EditText) findViewById(R.id.otp);
+                            int otpEntered=Integer.parseInt(otpText.getText().toString());
+                            if(otpEntered==OTPReceived) {
+                                isEmailValid = true;
+                                Message.toastMessage(getApplicationContext(),"Email verified successfully!","long");
+                            }
+                            else
+                                Message.toastMessage(getApplicationContext(),"Please enter a valid OTP!","long");
                         }
                     })
                     .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

@@ -8,4 +8,5 @@
     <string name="EnterPhone">Phone Number</string>
     <string name="EnterDepartment">Department</string>
     <string name="EnterEmail">Email</string>
+    <string name="OTP_HINT">Enter the OTP here!</string>
 </resources>
