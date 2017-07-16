@@ -14,4 +14,18 @@ abstract class Constant {
     final static String STUDENT_START_YR="StartYear_Student";
     final static String STUDENT_END_YR="EndYear_Student";
     final static int OTP_DIALOG=32;
+    final static String ATTENDANCE_DATABASE_NAME="Attendance_Database";
+    final static String LOGIN_DATABASE_NAME="Login_Database";
+    static int DATABASE_VERSION=1;
+    public static final String UID = "_id";
+    public static final String NAME = "Name";
+    public static final String BSSID = "BSSID";
+    public static final String SSID = "SSID";
+    public static final String ROLL_NUMBER = "Roll_Number";
+    public static final String ATTENDANCE = "Attendance";
+    public static final String PASSWORD = "Password";
+    public static final String YEAR_IN="Year_In";
+    public static final String YEAR_OUT="Year_Out";
+    public static DatabaseController databaseController;/* Initialize this in the home activity.
+                                                        Use this object to call any method of database.*/
 }
