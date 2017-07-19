@@ -17,7 +17,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_register);
+        setContentView(R.layout.activity_student_details);
         findViewById(R.id.submitDetails).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

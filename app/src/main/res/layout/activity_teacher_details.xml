@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_centerInParent="true">
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,12 +20,17 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/EnterDepartment"
-        android:id="@+id/teacherDepartment"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:hint="@string/EnterEmail"
         android:inputType="textEmailAddress"
         android:id="@+id/teacherEmail"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/EnterDepartment"
+        android:id="@+id/teacherDepartment"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/signup"
+        android:layout_gravity="center"/>
 </LinearLayout>

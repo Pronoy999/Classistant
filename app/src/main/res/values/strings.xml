@@ -9,4 +9,10 @@
     <string name="EnterDepartment">Department</string>
     <string name="EnterEmail">Email</string>
     <string name="OTP_HINT">Enter the OTP here!</string>
+    <string name="signup">SIGN UP</string>
+    <string name="addsubjecttext">subject</string>
+    <string name="raddsubject">subject</string>
+    <string name="saddsubjecttext">subject</string>
+    <string name="time">  :  -  :  </string>
+
 </resources>

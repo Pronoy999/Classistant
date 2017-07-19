@@ -9,7 +9,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_choose_profile);
         (findViewById(R.id.teacher)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

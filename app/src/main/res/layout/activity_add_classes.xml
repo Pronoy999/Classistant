@@ -8,12 +8,23 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight=".95"
-        android:hint="@string/saddsubjecttext"/>
+        android:layout_weight=".76"
+        android:hint="@string/addsubjecttext"/>
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight=".05"
+        android:layout_weight=".08"
+        android:clickable="true"/>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight=".08"
+        android:clickable="true"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight=".08"
         android:clickable="true"/>
 </LinearLayout>
 

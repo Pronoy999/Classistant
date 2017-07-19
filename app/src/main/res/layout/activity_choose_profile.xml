@@ -9,10 +9,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/teacher"
+        android:clickable="true"
         />
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/student"/>
+        android:id="@+id/student"
+        android:clickable="true"/>
     </LinearLayout>
     </ScrollView>
