@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Bundle;
 
 /**
  * Created by Shubham on 16-07-2017.
@@ -12,6 +11,7 @@ import android.os.Bundle;
 
 public class DatabaseController{
     MyHelper helper;
+
 
     /**
      * This method initializes the helper object that is used to access the database.
