@@ -26,7 +26,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
         });
     }
     protected void takeData(){
-        String name,roll,email,stream;
+        String name,roll,email,stream,password;
         int startYear,endYear;
         EditText editText;
         editText=(EditText) findViewById(R.id.studentName);
@@ -35,14 +35,22 @@ public class StudentRegisterActivity extends AppCompatActivity {
         roll=editText.getText().toString();
         editText=(EditText) findViewById(R.id.studentEmail);
         email=editText.getText().toString();
+        editText=(EditText) findViewById(R.id.studentPassword);
+        password=editText.getText().toString();
         editText=(EditText) findViewById(R.id.stream);
         stream=editText.getText().toString();
         editText=(EditText) findViewById(R.id.startYear);
         startYear=Integer.parseInt(editText.getText().toString());
         editText=(EditText) findViewById(R.id.endYear);
         endYear=Integer.parseInt(editText.getText().toString());
-        if(!checkEmailId(email)){
+        if(!ValidityChecker.checkValidityEmail(email)){
             Message.toastMessage(getApplicationContext(),"Please Enter a valid Email Id!","");
+            setNull(R.id.studentEmail);
+            return;
+        }
+        if(!ValidityChecker.checkValidityPassword(password)){
+            Message.toastMessage(getApplicationContext(),"Please Enter a valid password!","");
+            setNull(R.id.studentPassword);
             return;
         }
         //send the OTP to the Email Code.
@@ -78,25 +86,6 @@ public class StudentRegisterActivity extends AppCompatActivity {
             ActivityChanger.changeActivity(StudentRegisterActivity.this,"AddSubjectStudent");
         }
     }
-    protected boolean checkEmailId(String email){
-        int i,l=email.length();
-        boolean isvalid=false;
-        for(i=l-1;i>=0;i--){
-            if(email.charAt(i)=='.'){
-                isvalid=true;break;}
-        }
-        if(isvalid) {
-            isvalid=false;
-            for (int j = i; j >= 0; j--) {
-                if (email.charAt(j) == '@') {
-                    isvalid=true;break;
-                }
-            }
-        }
-        if(isvalid)
-            return true;
-        return false;
-    }
 
     @Override
     protected Dialog onCreateDialog(int id) {
@@ -125,5 +114,9 @@ public class StudentRegisterActivity extends AppCompatActivity {
                     });
         }
         return super.onCreateDialog(id);
+    }
+    private void setNull(int id){
+        EditText editText=(EditText) findViewById(id);
+        editText.setText("");
     }
 }

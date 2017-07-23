@@ -4,7 +4,7 @@
     <string name="otp">Enter the OTP send to your Email ID:</string>
     <string name="otpConfirm">Confirm</string>
     <string name="cancel">Cancel</string>
-    <string name="EnterName">Name:</string>
+    <string name="EnterName">Name</string>
     <string name="EnterPhone">Phone Number</string>
     <string name="EnterDepartment">Department</string>
     <string name="EnterEmail">Email</string>
@@ -14,5 +14,6 @@
     <string name="raddsubject">subject</string>
     <string name="saddsubjecttext">subject</string>
     <string name="time">  :  -  :  </string>
+    <string name="teacherPassword">Password</string>
 
 </resources>

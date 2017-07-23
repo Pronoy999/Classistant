@@ -11,7 +11,9 @@ android:padding="20dip">
     android:layout_height="wrap_content"
     android:hint="Name"
     android:layout_weight=".2"
-    android:id="@+id/studentName"/>
+    android:id="@+id/studentName">
+    <requestFocus/>
+</EditText>
 <EditText
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -26,6 +28,12 @@ android:padding="20dip">
     android:layout_weight=".2"
     android:id="@+id/studentEmail"
     android:inputType="textEmailAddress"/>
+<EditText
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/studentPassword"
+    android:hint="@string/teacherPassword"
+    android:inputType="textPassword"/>
 <EditText
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
