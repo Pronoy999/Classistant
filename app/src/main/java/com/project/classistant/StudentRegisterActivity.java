@@ -117,6 +117,6 @@ public class StudentRegisterActivity extends AppCompatActivity {
     }
     private void setNull(int id){
         EditText editText=(EditText) findViewById(id);
-        editText.setText("");
+        editText.getText().clear();
     }
 }

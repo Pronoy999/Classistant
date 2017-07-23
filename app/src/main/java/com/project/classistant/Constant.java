@@ -28,4 +28,5 @@ abstract class Constant {
     public static final String YEAR_OUT="Year_Out";
     public static DatabaseController databaseController;/* Initialize this in the home activity.
                                                         Use this object to call any method of database.*/
+    public static final int PASSWORD_DIALOG=10;
 }
