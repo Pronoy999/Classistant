@@ -29,5 +29,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:design:24.2.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile group: 'org.apache.servicemix.bundles', name: 'org.apache.servicemix.bundles.jexcelapi', version: '2.4.2_4'
     testCompile 'junit:junit:4.12'
 }
