@@ -27,9 +27,7 @@
         <activity android:name=".StudentMainActivity" />
         <activity android:name=".TeacherRegisterActivity" />
         <activity android:name=".TeacherMainActivity" />
-        <activity android:name=".activity_splash_screen_student" />
-        <activity android:name=".activity_splash_screen_teacher" />
-        <activity android:name=".SplashScreenMainActivity"></activity>
+        <activity android:name=".LoginActivity"></activity>
     </application>
 
 </manifest>
