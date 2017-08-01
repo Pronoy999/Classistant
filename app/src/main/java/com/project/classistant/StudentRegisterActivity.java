@@ -78,11 +78,14 @@ public class StudentRegisterActivity extends AppCompatActivity {
             studentDetails.putString(Constant.STUDENT_NAME, name);
             studentDetails.putString(Constant.STUDENT_ROLL, roll);
             studentDetails.putString(Constant.STUDENT_EMAIL, email);
+            HashMaker hashMaker=new HashMaker("SHA-256");
+            studentDetails.putString(Constant.STUDENT_PASSWORD,hashMaker.getHash(password));
             studentDetails.putString(Constant.STUDENT_STREAM, stream);
             studentDetails.putInt(Constant.STUDENT_START_YR, startYear);
             studentDetails.putInt(Constant.STUDENT_END_YR, endYear);
             FileController fileController = new FileController(getApplicationContext());
             fileController.CreateAccountStudent(studentDetails);
+            fileController.createLoginDetails(Constant.ACCOUNT_STUDENT,email,hashMaker.getHash(password));
             ActivityChanger.changeActivity(StudentRegisterActivity.this,"AddSubjectStudent");
         }
     }

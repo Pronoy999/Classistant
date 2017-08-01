@@ -15,14 +15,19 @@ public class HashMaker {
      * Appropriate string containing the name of the algorithm to be applied is passed (e.g: "SHA-256").
      * NoSuchAlgorithmException is thrown if given algorithm doesn't exist.
      **/
-    HashMaker(String algorithm)throws NoSuchAlgorithmException{
-        this.mDigest = MessageDigest.getInstance(algorithm);
+    HashMaker(String algorithm){
+        try {
+            this.mDigest = MessageDigest.getInstance(algorithm);
+        }
+        catch (NoSuchAlgorithmException e){
+            Message.logMessages("HASH ERROR: ",e.toString());
+        }
     }
 
     /**
      * Returns the hash of the message string in a modified way (a sequence of positive integers up to 255 separated by a dot '.')
      * */
-    String getHash(String message){
+    protected String getHash(String message){
         mDigest.update(message.getBytes(StandardCharsets.UTF_8));
         byte[] byteHash = mDigest.digest();
         String hash="";
