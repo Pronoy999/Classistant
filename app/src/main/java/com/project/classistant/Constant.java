@@ -15,7 +15,7 @@ abstract class Constant {
     final static String DATE_BIRTH_STUDENT="dob";
     final static String COLLEGE_NAME="college";
     final static String NAME_STUDENT="name";
-
+    //Login Constants
     final static String LOGIN_FILENAME="LoginFile.txt";
     final static String ACCOUNT="ACCOUNT";
     //Student CONSTANTS

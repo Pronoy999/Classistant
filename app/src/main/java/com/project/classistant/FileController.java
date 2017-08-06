@@ -128,7 +128,9 @@ public class FileController {
             HTTPHandler httpHandler=new HTTPHandler(Constant.URL_QUERY,100000,true,true,"POST");
             httpHandler.HttpPost(student);
         }
-        catch (IOException e){}
+        catch (IOException e){
+            Message.logMessages("ERROR: ",e.toString());
+        }
     }
 }
 
