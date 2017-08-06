@@ -9,7 +9,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_chooseProfile);
+        setContentView(R.layout.activity_login_choose_profile);
         (findViewById(R.id.teacher)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
