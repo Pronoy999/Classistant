@@ -27,7 +27,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
         });
     }
     protected void takeData(){
-        String name,roll,email,stream,password;
+        String name,roll,email,stream,section,password,dob,clgName;
         int startYear,endYear;
         EditText editText;
         editText=(EditText) findViewById(R.id.studentName);
@@ -41,10 +41,17 @@ public class StudentRegisterActivity extends AppCompatActivity {
         password=hashMaker.getHash(password);
         editText=(EditText) findViewById(R.id.stream);
         stream=editText.getText().toString();
+        editText=(EditText)findViewById(R.id.section);
+        section=editText.getText().toString();
         editText=(EditText) findViewById(R.id.startYear);
         startYear=Integer.parseInt(editText.getText().toString());
         editText=(EditText) findViewById(R.id.endYear);
         endYear=Integer.parseInt(editText.getText().toString());
+        editText=(EditText) findViewById(R.id.dob);
+        dob=editText.getText().toString();
+        editText=(EditText) findViewById(R.id.collegename);
+        clgName=editText.getText().toString();
+
         if(!ValidityChecker.checkValidityEmail(email)){
             Message.toastMessage(getApplicationContext(),"Please Enter a valid Email Id!","");
             setNull(R.id.studentEmail);
@@ -83,8 +90,11 @@ public class StudentRegisterActivity extends AppCompatActivity {
             HashMaker hashMaker=new HashMaker("SHA-256");
             studentDetails.putString(Constant.STUDENT_PASSWORD,hashMaker.getHash(password));
             studentDetails.putString(Constant.STUDENT_STREAM, stream);
+            studentDetails.putString(Constant.STUDENT_SECTION,section);
             studentDetails.putInt(Constant.STUDENT_START_YR, startYear);
             studentDetails.putInt(Constant.STUDENT_END_YR, endYear);
+            studentDetails.putString(Constant.COLLEGE_NAME,clgName);
+            studentDetails.putString(Constant.DATE_BIRTH_STUDENT,dob);
             FileController fileController = new FileController(getApplicationContext());
             fileController.CreateAccountStudent(studentDetails);
             fileController.createLoginDetails(Constant.ACCOUNT_STUDENT,email,hashMaker.getHash(password));
