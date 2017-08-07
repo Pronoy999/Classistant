@@ -1,5 +1,6 @@
 package com.project.classistant;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -47,6 +48,19 @@ public class FileController {
             fileOutputStream.write(data.getBytes());
             fileOutputStream.close();
             //TODO: Insert this to Student_MetaData Table.
+            ContentValues studentValues=new ContentValues();
+            studentValues.put(Constant.TYPE,Constant.TYPE_INSERT_STUDENT_METADATA);
+            studentValues.put(Constant.NAME_STUDENT,studentInfo.getString(Constant.STUDENT_NAME));
+            studentValues.put(Constant.STUDENT_EMAIL,studentInfo.getString(Constant.STUDENT_EMAIL));
+            //TODO: Date of Birth of Student.
+            studentValues.put(Constant.PASSWORD_HASH,studentInfo.getString(Constant.STUDENT_PASSWORD));
+            studentValues.put(Constant.STUDENT_START_YR,studentInfo.getString(Constant.STUDENT_START_YR));
+            studentValues.put(Constant.STUDENT_END_YR,studentInfo.getString(Constant.STUDENT_END_YR));
+            //TODO: Add college Name.
+            studentValues.put(Constant.BSSID,studentInfo.getString(Constant.BSSID));
+            //TODO:Add Class name.
+            studentValues.put(Constant.STUDENT_STREAM,studentInfo.getString(Constant.STUDENT_STREAM));
+            syncCloud(studentValues);
         }
         catch (IOException e){
             Message.logMessages("IOException: ",e.toString());
@@ -108,6 +122,15 @@ public class FileController {
             Message.logMessages("EXCEPTION: ",e.toString());
         }
         return false;
+    }
+    protected void syncCloud(ContentValues student){
+        try{
+            HTTPHandler httpHandler=new HTTPHandler(Constant.URL_QUERY,100000,true,true,"POST");
+            httpHandler.HttpPost(student);
+        }
+        catch (IOException e){
+            Message.logMessages("ERROR: ",e.toString());
+        }
     }
 }
 

@@ -14,6 +14,7 @@ import org.json.JSONObject;
 
 public class StudentRegisterActivity extends AppCompatActivity {
     boolean isEmailValid;int OTPReceived;
+    HashMaker hashMaker=new HashMaker("SHA-256");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +38,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
         email=editText.getText().toString();
         editText=(EditText) findViewById(R.id.studentPassword);
         password=editText.getText().toString();
+        password=hashMaker.getHash(password);
         editText=(EditText) findViewById(R.id.stream);
         stream=editText.getText().toString();
         editText=(EditText) findViewById(R.id.startYear);
@@ -55,7 +57,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
         }
         //send the OTP to the Email Code.
         try {
-            HTTPHandler httpHandler = new HTTPHandler("http://classistant.esy.es/MyPhpProject2/confirmer.php", 10000, true, true, "POST");
+            HTTPHandler httpHandler = new HTTPHandler(Constant.URL_EMAIL_CONFIRM, 10000, true, true, "POST");
             ContentValues contentValues=new ContentValues();
             contentValues.put("id",email);
             httpHandler.HttpPost(contentValues);
