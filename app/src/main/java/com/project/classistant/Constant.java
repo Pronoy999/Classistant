@@ -21,6 +21,7 @@ abstract class Constant {
     final static String ACCOUNT_FILENAME="ACCOUNT_DETAILS";
     final static String ACCOUNT_STUDENT="STUDENT_ACCOUNT";
     final static String ACCOUNT_TEACHER="TEACHER_ACCOUNT";
+    final static String ACCOUNT_LOGGEDIN="";
     //Student CONSTANTS
     final static String STUDENT_NAME="Student_Name";
     final static String STUDENT_ROLL="Student_Roll";
