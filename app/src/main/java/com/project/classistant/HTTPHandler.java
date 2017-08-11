@@ -1,19 +1,15 @@
 package com.project.classistant;
 
-import android.content.ContentValues;
-
+import org.json.JSONObject;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.Iterator;
+
 
 /**
  * Class to manage all HTTP requests to server.
@@ -43,32 +39,28 @@ class HTTPHandler {
     public void makeConnection() throws IOException{
         this.connection.connect();
     }
+    /**
+     * De-establishes the connection
+     */
+    public void closeConnection(){
+        this.connection.disconnect();
+    }
 
     /**
-     * Makes a HTTP POST request containing the content value data to be posted
+     * Makes a HTTP POST request containing the JSONObject to be posted
      * NOTE: This establishes the connection. No need to use HTTPHandler.makeConnection() later.
      * */
-    void HttpPost(ContentValues post)throws IOException{
+    void HttpPost(JSONObject jpost)throws IOException{
         OutputStream os = this.connection.getOutputStream();
-        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-        writer.write(encodeForPost(post));
-        writer.flush();
-        writer.close();
+        os.write(encodeForPost(jpost).getBytes());
         os.close();
     }
 
-    private String encodeForPost(ContentValues values) throws UnsupportedEncodingException {
-        Iterator<String> itr = values.keySet().iterator();
-        StringBuilder request = new StringBuilder();
-        if(itr.hasNext()) {
-            String key = itr.next();
-            request.append(URLEncoder.encode(key, "UTF-8") + "=" + URLEncoder.encode(values.get(key).toString(), "UTF-8"));
-            while (itr.hasNext()) {
-                key = itr.next();
-                request.append("&" + URLEncoder.encode(key, "UTF-8") + "=" + URLEncoder.encode(values.get(key).toString(), "UTF-8"));
-            }
-        }
-        return request.toString();
+    /**
+     * Private method for encoding
+     * */
+    private String encodeForPost(JSONObject json) throws UnsupportedEncodingException {
+        return URLEncoder.encode("json", "UTF-8")+"="+json.toString();
     }
     /**
      * Returns the response code of the connection
