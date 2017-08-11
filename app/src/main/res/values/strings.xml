@@ -15,5 +15,8 @@
     <string name="saddsubjecttext">subject</string>
     <string name="time">  :  -  :  </string>
     <string name="teacherPassword">Password</string>
+    <string name="dob">Date of Birth</string>
+    <string name="collegename">Institute Name</string>
+    <string name="section">Class</string>
 
 </resources>

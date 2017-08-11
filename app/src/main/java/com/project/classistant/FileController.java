@@ -1,5 +1,6 @@
 package com.project.classistant;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -7,7 +8,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InterruptedIOException;
 import java.util.Scanner;
 
 /**
@@ -40,13 +40,35 @@ public class FileController {
             data=Constant.STUDENT_STREAM+":"+studentInfo.getString(Constant.STUDENT_STREAM)+";";
             fileOutputStream.write(data.getBytes());
             data="";
+            data=Constant.STUDENT_SECTION+":"+studentInfo.getString(Constant.STUDENT_SECTION)+";";
+            fileOutputStream.write(data.getBytes());
+            data="";
             data=Constant.STUDENT_START_YR+":"+studentInfo.getString(Constant.STUDENT_START_YR)+";";
             fileOutputStream.write(data.getBytes());
             data="";
             data=Constant.STUDENT_END_YR+":"+studentInfo.getString(Constant.STUDENT_END_YR)+";";
             fileOutputStream.write(data.getBytes());
+            data="";
+            data=Constant.COLLEGE_NAME+":"+studentInfo.getString(Constant.COLLEGE_NAME)+";";
+            fileOutputStream.write(data.getBytes());
+            data="";
+            data=Constant.DATE_BIRTH_STUDENT+":"+studentInfo.getString(Constant.DATE_BIRTH_STUDENT)+";";
+            fileOutputStream.write(data.getBytes());
+            data="";
             fileOutputStream.close();
-            //TODO: Insert this to Student_MetaData Table.
+            ContentValues studentValues=new ContentValues();
+            studentValues.put(Constant.TYPE,Constant.TYPE_INSERT_STUDENT_METADATA);
+            studentValues.put(Constant.NAME_STUDENT,studentInfo.getString(Constant.STUDENT_NAME));
+            studentValues.put(Constant.STUDENT_EMAIL,studentInfo.getString(Constant.STUDENT_EMAIL));
+            studentValues.put(Constant.DATE_BIRTH_STUDENT,studentInfo.getString(Constant.DATE_BIRTH_STUDENT));
+            studentValues.put(Constant.PASSWORD_HASH,studentInfo.getString(Constant.STUDENT_PASSWORD));
+            studentValues.put(Constant.STUDENT_START_YR,studentInfo.getString(Constant.STUDENT_START_YR));
+            studentValues.put(Constant.STUDENT_END_YR,studentInfo.getString(Constant.STUDENT_END_YR));
+            studentValues.put(Constant.COLLEGE_NAME,studentInfo.getString(Constant.COLLEGE_NAME));
+            studentValues.put(Constant.BSSID,studentInfo.getString(Constant.BSSID));
+            studentValues.put(Constant.STUDENT_SECTION,studentInfo.getString(Constant.STUDENT_SECTION));
+            studentValues.put(Constant.STUDENT_STREAM,studentInfo.getString(Constant.STUDENT_STREAM));
+            syncCloud(studentValues);//uploading the data to CLOUD.
         }
         catch (IOException e){
             Message.logMessages("IOException: ",e.toString());
@@ -108,6 +130,15 @@ public class FileController {
             Message.logMessages("EXCEPTION: ",e.toString());
         }
         return false;
+    }
+    private void syncCloud(ContentValues student){
+        try{
+            HTTPHandler httpHandler=new HTTPHandler(Constant.URL_QUERY,100000,true,true,"POST");
+            httpHandler.HttpPost(student);
+        }
+        catch (IOException e){
+            Message.logMessages("ERROR: ",e.toString());
+        }
     }
 }
 
