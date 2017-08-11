@@ -19,9 +19,9 @@ abstract class Constant {
     final static String NAME_STUDENT="name";
     final static String VALUE="values";
     //Login Constants
-    final static String LOGIN_FILENAME="LoginFile.txt";
+    final static String LOGIN_FILENAME="LoginFile.dat";
     final static String ACCOUNT="ACCOUNT";
-    final static String ACCOUNT_FILENAME="ACCOUNT_DETAILS";
+    final static String ACCOUNT_FILENAME="ACCOUNT_DETAILS.dat";
     final static String ACCOUNT_STUDENT="STUDENT_ACCOUNT";
     final static String ACCOUNT_TEACHER="TEACHER_ACCOUNT";
     final static String ACCOUNT_LOGGEDIN="";
