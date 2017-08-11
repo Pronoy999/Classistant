@@ -50,10 +50,14 @@ class HTTPHandler {
      * Makes a HTTP POST request containing the JSONObject to be posted
      * NOTE: This establishes the connection. No need to use HTTPHandler.makeConnection() later.
      * */
-    void HttpPost(JSONObject jpost)throws IOException{
-        OutputStream os = this.connection.getOutputStream();
-        os.write(encodeForPost(jpost).getBytes());
-        os.close();
+    void HttpPost(JSONObject jpost){
+        try(OutputStream os = this.connection.getOutputStream()) {
+            os.write(encodeForPost(jpost).getBytes());
+            os.close();
+        }
+        catch (IOException e){
+            Message.logMessages("ERROR: ",e.toString());
+        }
     }
 
     /**
@@ -73,14 +77,17 @@ class HTTPHandler {
     /**
      * Returns the reply string of data after the server request
      * */
-    String getReplyData()throws IOException{
-        BufferedReader reader = new BufferedReader(new InputStreamReader(this.connection.getInputStream(), "UTF-8"));
+    String getReplyData(){
         StringBuilder retString = new StringBuilder();
-        String line;
-
-        while ((line = reader.readLine())!=null)
-            retString.append(line);
-        reader.close();
+        try(BufferedReader reader = new BufferedReader(new InputStreamReader(this.connection.getInputStream(), "UTF-8"))) {
+            String line;
+            while ((line = reader.readLine()) != null)
+                retString.append(line);
+            reader.close();
+        }
+        catch (IOException e){
+            Message.logMessages("ERROR: ",e.toString());
+        }
         return retString.toString();
     }
 }

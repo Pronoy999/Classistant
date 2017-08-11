@@ -6,15 +6,18 @@ package com.project.classistant;
 
 abstract class Constant {
     final static String URL_EMAIL_CONFIRM = "http://classistant.esy.es/MyPhpProject2/confirmer.php";
-    //CONTENT VALUES CONSTANT
+    //JSON VALUES CONSTANT
     final static String URL_QUERY="http://classistant.esy.es/MyPhpProject2/Query.php";
     final static String TYPE="type";
     final static String TYPE_INSERT_STUDENT_METADATA="insert_student_metadata";
+    final static String TYPE_INSERT_LOGINMETADATA="insert_login_metadata";
     final static String TYPE_UPDATE="update";
+    final static String TYPE_SELECT="select";
     final static String PASSWORD_HASH="password_hash";
     final static String DATE_BIRTH_STUDENT="dob";
     final static String COLLEGE_NAME="college";
     final static String NAME_STUDENT="name";
+    final static String VALUE="values";
     //Login Constants
     final static String LOGIN_FILENAME="LoginFile.txt";
     final static String ACCOUNT="ACCOUNT";
@@ -22,6 +25,7 @@ abstract class Constant {
     final static String ACCOUNT_STUDENT="STUDENT_ACCOUNT";
     final static String ACCOUNT_TEACHER="TEACHER_ACCOUNT";
     final static String ACCOUNT_LOGGEDIN="";
+    final static String LOGIN_EMAIL="email";
     //Student CONSTANTS
     final static String STUDENT_NAME="Student_Name";
     final static String STUDENT_ROLL="Student_Roll";
