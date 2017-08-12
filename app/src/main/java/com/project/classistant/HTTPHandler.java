@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.Inet4Address;
 import java.net.URL;
 import java.net.URLEncoder;
 
@@ -18,7 +19,7 @@ import java.net.URLEncoder;
 class HTTPHandler {
 
     private HttpURLConnection connection;
-    final static int HTTP_OK = HttpURLConnection.HTTP_OK; //http status 200
+    private final static int HTTP_OK = HttpURLConnection.HTTP_OK; //http status 200
 
     /**
      * Initialises the attributes of the connection
@@ -36,13 +37,13 @@ class HTTPHandler {
      * Establishes the connection
      * (Use this when a connection is to be made without sending additional data through POST or GET)
      * */
-    public void makeConnection() throws IOException{
+    protected void makeConnection() throws IOException{
         this.connection.connect();
     }
     /**
      * De-establishes the connection
      */
-    public void closeConnection(){
+    protected void closeConnection(){
         this.connection.disconnect();
     }
 
@@ -50,7 +51,7 @@ class HTTPHandler {
      * Makes a HTTP POST request containing the JSONObject to be posted
      * NOTE: This establishes the connection. No need to use HTTPHandler.makeConnection() later.
      * */
-    void HttpPost(JSONObject jpost){
+    protected void HttpPost(JSONObject jpost){
         try(OutputStream os = this.connection.getOutputStream()) {
             os.write(encodeForPost(jpost).getBytes());
             os.close();
@@ -77,7 +78,7 @@ class HTTPHandler {
     /**
      * Returns the reply string of data after the server request
      * */
-    String getReplyData(){
+    protected String getReplyData(){
         StringBuilder retString = new StringBuilder();
         try(BufferedReader reader = new BufferedReader(new InputStreamReader(this.connection.getInputStream(), "UTF-8"))) {
             String line;
@@ -89,5 +90,20 @@ class HTTPHandler {
             Message.logMessages("ERROR: ",e.toString());
         }
         return retString.toString();
+    }
+
+    /**
+     * Method to check whether the internet is working or not.
+     */
+    protected boolean isReachable(){
+        try{
+            return connection.getResponseCode() == HTTP_OK;
+        }
+        catch (IOException e){
+            Message.logMessages("ERROR: ",e.toString());
+        }
+        finally {
+            return false;
+        }
     }
 }
