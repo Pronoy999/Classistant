@@ -26,6 +26,8 @@ abstract class Constant {
     final static String ACCOUNT_TEACHER="TEACHER_ACCOUNT";
     final static String ACCOUNT_LOGGEDIN="";
     final static String LOGIN_EMAIL="email";
+    final static String IS_VALID="isValid";
+    final static String MSG="msg";
     //Student CONSTANTS
     final static String STUDENT_NAME="Student_Name";
     final static String STUDENT_ROLL="Student_Roll";

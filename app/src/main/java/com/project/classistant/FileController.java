@@ -3,7 +3,6 @@ package com.project.classistant;
 import android.content.Context;
 import android.os.Bundle;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -101,7 +100,7 @@ public class FileController {
             Message.logMessages("EXCEPTION: ",e.toString());
         }
     }
-    protected boolean checkLoginFile(String account,String email,String passwordHash){
+    protected boolean checkLogin(String account,String email,String passwordHash){
         File file=new File(Constant.LOGIN_FILENAME);
         try {
             if (file.exists()) {
@@ -122,21 +121,25 @@ public class FileController {
                 if(account.equalsIgnoreCase(_account) && email.equals(_email) && passwordHash.equals(_passwordHash))
                     return true;
                 else if (!passwordHash.equals(_passwordHash)){
-                    Message.toastMessage(context,"Incorrect Password!","");
+                    Message.toastMessage(context,"Incorrect Password!","long");
                     return false;
                 }
             }
             else {
                 JSONObject loginCheck=new JSONObject();
-                JSONArray value=new JSONArray();
-                value.put(1,email);
-                value.put(2,passwordHash);
                 loginCheck.put(Constant.TYPE,Constant.TYPE_SELECT);
-                loginCheck.put(Constant.VALUE,value);
+                loginCheck.put(Constant.LOGIN_EMAIL,email);
+                loginCheck.put(Constant.PASSWORD_HASH,passwordHash);
+                loginCheck.put(Constant.ACCOUNT,account);
                 String cloudData=getDataCloud(loginCheck);
                 if(!cloudData.equals("")){
                     JSONObject reply=new JSONObject(cloudData);
-                    //TODO: Get the data from the Cloud.
+                    if(reply.getBoolean(Constant.IS_VALID))
+                        return true;
+                    else{
+                        Message.toastMessage(context,reply.getString(Constant.MSG),"long");
+                        return false;
+                    }
                 }
             }
         }

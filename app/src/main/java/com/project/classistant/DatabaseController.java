@@ -60,10 +60,6 @@ public class DatabaseController{
 
 
 
-
-
-
-
         private static final String DROP_TABLE = "DROP TABLE IF EXISTS " + Constant.ATTENDANCE_DATABASE_NAME;
 
 
