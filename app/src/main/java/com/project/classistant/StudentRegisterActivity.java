@@ -65,9 +65,9 @@ public class StudentRegisterActivity extends AppCompatActivity {
         //send the OTP to the Email Code.
         try {
             HTTPHandler httpHandler = new HTTPHandler(Constant.URL_EMAIL_CONFIRM, 10000, true, true, "POST");
-            ContentValues contentValues=new ContentValues();
-            contentValues.put("id",email);
-            httpHandler.HttpPost(contentValues);
+            JSONObject emailID=new JSONObject();
+            emailID.put("id",email);
+            httpHandler.HttpPost(emailID);
             String reply=httpHandler.getReplyData();
             JSONObject jsonObject=new JSONObject(reply);
             int success=jsonObject.getInt("suc");

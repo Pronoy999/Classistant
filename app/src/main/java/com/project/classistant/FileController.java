@@ -1,8 +1,10 @@
 package com.project.classistant;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.os.Bundle;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -56,7 +58,7 @@ public class FileController {
             fileOutputStream.write(data.getBytes());
             data="";
             fileOutputStream.close();
-            ContentValues studentValues=new ContentValues();
+            JSONObject studentValues=new JSONObject();
             studentValues.put(Constant.TYPE,Constant.TYPE_INSERT_STUDENT_METADATA);
             studentValues.put(Constant.NAME_STUDENT,studentInfo.getString(Constant.STUDENT_NAME));
             studentValues.put(Constant.STUDENT_EMAIL,studentInfo.getString(Constant.STUDENT_EMAIL));
@@ -85,7 +87,12 @@ public class FileController {
             fileOutputStream.write((Constant.STUDENT_EMAIL+":"+email+";").getBytes());
             fileOutputStream.write((Constant.STUDENT_PASSWORD+":"+passwordHash+";").getBytes());
             fileOutputStream.close();
-            //TODO: Insert the email and password to Login_table.
+            JSONObject studentLogin=new JSONObject();
+            studentLogin.put(Constant.TYPE,Constant.TYPE_INSERT_LOGINMETADATA);
+            studentLogin.put(Constant.ACCOUNT,Constant.ACCOUNT_STUDENT);
+            studentLogin.put(Constant.STUDENT_EMAIL,email);
+            studentLogin.put(Constant.PASSWORD_HASH,passwordHash);
+            syncCloud(studentLogin); //insert into LoginMetadata table.
         }
         catch (IOException e){
             Message.logMessages("IOException: ",e.toString());
@@ -120,7 +127,17 @@ public class FileController {
                 }
             }
             else {
-                //TODO: Check from the Login_Table.
+                JSONObject loginCheck=new JSONObject();
+                JSONArray value=new JSONArray();
+                value.put(1,email);
+                value.put(2,passwordHash);
+                loginCheck.put(Constant.TYPE,Constant.TYPE_SELECT);
+                loginCheck.put(Constant.VALUE,value);
+                String cloudData=getDataCloud(loginCheck);
+                if(!cloudData.equals("")){
+                    JSONObject reply=new JSONObject(cloudData);
+                    //TODO: Get the data from the Cloud.
+                }
             }
         }
         catch (IOException e){
@@ -131,7 +148,7 @@ public class FileController {
         }
         return false;
     }
-    private void syncCloud(ContentValues student){
+    private void syncCloud(JSONObject student){
         try{
             HTTPHandler httpHandler=new HTTPHandler(Constant.URL_QUERY,100000,true,true,"POST");
             httpHandler.HttpPost(student);
@@ -139,6 +156,19 @@ public class FileController {
         catch (IOException e){
             Message.logMessages("ERROR: ",e.toString());
         }
+    }
+    private String getDataCloud(JSONObject jsonObject){
+        String reply="";
+        try{
+            HTTPHandler httpHandler=new HTTPHandler(Constant.URL_QUERY,10000,true,true,"POST");
+            httpHandler.HttpPost(jsonObject);
+            reply=httpHandler.getReplyData();
+            httpHandler.closeConnection();
+        }
+        catch (IOException e){
+            Message.logMessages("ERROR: ",e.toString());
+        }
+        return reply;
     }
 }
 
