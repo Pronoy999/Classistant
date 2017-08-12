@@ -17,7 +17,9 @@ public class DatabaseController{
      * This method initializes the helper object that is used to access the database.
      * @param context: The context of the activity where the database is opened.
      */
-    DatabaseController(Context context){helper=new MyHelper(context); }
+    DatabaseController(Context context){
+        helper=new MyHelper(context);
+    }
 
 
    /* public Bundle getAllData(){
@@ -33,7 +35,8 @@ public class DatabaseController{
      */
     public class MyHelper extends SQLiteOpenHelper{
 
-        private static final String CREATE_TABLE = "CREATE TABLE " + Constant.ATTENDANCE_DATABASE_NAME + "("
+        private static final String CREATE_TABLE_TEACHER = "CREATE TABLE "
+                +Constant.ATTENDANCE_DATABASE_NAME + "("
                 +Constant.UID+ " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 +Constant.NAME + " VARCHAR(255), "
                 +Constant.ROLL_NUMBER +" VARCHAR(255),"
@@ -43,6 +46,21 @@ public class DatabaseController{
                 +Constant.ATTENDANCE +" INT,"
                 +Constant.YEAR_IN +" INT,"
                 +Constant.YEAR_OUT +" INT);";
+
+        private static final String CREATE_TABLE_STUDENT = "CREATE TABLE "
+                + Constant.STUDENT_DATABASE_NAME + "("
+                + Constant.UID+ " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + Constant.SUBJECT+ " VARCHAR(255), "
+                + Constant.TEACHER_ID+ " VARCHAR(255), "
+                + Constant.TEACHER_NAME + " VARCHAR(255), "
+                + Constant.TEACHER_EMAIL + " VARCHAR(255), "
+                + Constant.TEACHER_PHONE+ " VARCHAR(255), "
+                + Constant.TOTAL_ATTENDANCE+ " INT, "
+                + Constant.ATTENDANCE+ " INT); ";
+
+
+
+
 
 
 
@@ -63,8 +81,15 @@ public class DatabaseController{
             try {
                 //Execute a single SQL statement that is NOT a SELECT or
                 // any other SQL statement that returns data.
-                sqLiteDatabase.execSQL(CREATE_TABLE);
-                Message.logMessages("onCreate :","onCreate() called");
+
+                if(Constant.ACCOUNT.equals("Teacher")) {
+                    sqLiteDatabase.execSQL(CREATE_TABLE_TEACHER);
+                    Message.logMessages("onCreate :", "onCreate() called");
+                }
+                else {
+                    sqLiteDatabase.execSQL(CREATE_TABLE_STUDENT);
+                    Message.logMessages("onCreate :", "onCreate() called");
+                }
             } catch (SQLException e) {
                 Message.logMessages("Error in onCreate :",""+e);
             }

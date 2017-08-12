@@ -35,6 +35,7 @@ abstract class Constant {
     final static String STUDENT_SECTION="Section";
     final static String STUDENT_START_YR="StartYear_Student";
     final static String STUDENT_END_YR="EndYear_Student";
+    final static String TOTAL_ATTENDANCE="Total_Attendance";
 
     // Teacher CONSTANTS
     final static String TEACHER_NAME="Teacher_Name";
@@ -58,10 +59,18 @@ abstract class Constant {
     static final String BSSID = "BSSID";
     static final String SSID = "SSID";
     static final String ROLL_NUMBER = "Roll_Number";
-    static final String ATTENDANCE = "Attendance";
+
     static final String PASSWORD = "Password";
     static final String YEAR_IN="Year_In";
     static final String YEAR_OUT="Year_Out";
+
+    //Constants for Student database--
+    static final String STUDENT_DATABASE_NAME="Student_DB";
+    static final String SUBJECT="Subjects";
+    static final String TEACHER_ID="Teacher_Id";
+    static final String ATTENDANCE = "Attendance";
+
+
     static DatabaseController databaseController;/* Initialize this in the home activity.
                                                         Use this object to call any method of database.*/
     public static final int PASSWORD_DIALOG=10;
