@@ -2,7 +2,6 @@ package com.project.classistant;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +18,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_details);
+        Message.toastMessage(getApplicationContext(),"If in your college you don't have a section for your stream then enter 'A' or else keep it blank.","long");
         findViewById(R.id.submitDetails).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -32,25 +32,64 @@ public class StudentRegisterActivity extends AppCompatActivity {
         EditText editText;
         editText=(EditText) findViewById(R.id.studentName);
         name=editText.getText().toString();
+        if(name.isEmpty() || name.equals("")){
+            Message.toastMessage(getApplicationContext(),"Please enter your name!","");
+            return;
+        }
         editText=(EditText) findViewById(R.id.studentRollNumber);
         roll=editText.getText().toString();
+        if (roll.isEmpty() || roll.equals("")){
+            Message.toastMessage(getApplicationContext(),"You have to give your roll number!","");
+            return;
+        }
         editText=(EditText) findViewById(R.id.studentEmail);
         email=editText.getText().toString();
+        if (email.isEmpty() || email.equals("")){
+            Message.toastMessage(getApplicationContext(),"We need to contact you through your email ID!","");
+            return;
+        }
         editText=(EditText) findViewById(R.id.studentPassword);
         password=editText.getText().toString();
+        if (password.isEmpty() || password.equals("")){
+            Message.toastMessage(getApplicationContext(),"Please provide a password!","");
+            return;
+        }
         password=hashMaker.getHash(password);
         editText=(EditText) findViewById(R.id.stream);
         stream=editText.getText().toString();
+        if (stream.isEmpty() || stream.equals("")){
+            Message.toastMessage(getApplicationContext(),"We need to know what you are studying!","");
+            return;
+        }
         editText=(EditText)findViewById(R.id.section);
         section=editText.getText().toString();
+        if (section.equals("")){
+            section="A";
+        }
         editText=(EditText) findViewById(R.id.startYear);
         startYear=Integer.parseInt(editText.getText().toString());
+        if (editText.getText().toString().isEmpty() || editText.getText().toString().equals("")){
+            Message.toastMessage(getApplicationContext(),"Please enter the start year!","");
+            return;
+        }
         editText=(EditText) findViewById(R.id.endYear);
         endYear=Integer.parseInt(editText.getText().toString());
+        if (editText.getText().toString().isEmpty() || editText.getText().toString().equals("")){
+            Message.toastMessage(getApplicationContext(),"Please enter the end year!","");
+            return;
+        }
         editText=(EditText) findViewById(R.id.dob);
         dob=editText.getText().toString();
+        if(dob.isEmpty() || dob.equals("")){
+            Message.toastMessage(getApplicationContext(),"How young are you?","");
+            return;
+        }
         editText=(EditText) findViewById(R.id.collegename);
         clgName=editText.getText().toString();
+        if (clgName.isEmpty() || clgName.equals("")){
+            Message.toastMessage(getApplicationContext(),"Which college you are in?","");
+            return;
+        }
 
         if(!ValidityChecker.checkValidityEmail(email)){
             Message.toastMessage(getApplicationContext(),"Please Enter a valid Email Id!","");
@@ -59,12 +98,17 @@ public class StudentRegisterActivity extends AppCompatActivity {
         }
         if(!ValidityChecker.checkValidityPassword(password)){
             Message.toastMessage(getApplicationContext(),"Please Enter a valid password!","");
+            //TODO:Provide the details for the password.
             setNull(R.id.studentPassword);
             return;
         }
         //send the OTP to the Email Code.
         try {
             HTTPHandler httpHandler = new HTTPHandler(Constant.URL_EMAIL_CONFIRM, 10000, true, true, "POST");
+            if(!httpHandler.isReachable()){
+                Message.toastMessage(getApplicationContext(),"Ops! Your internet connection is wonky!","");
+                return;
+            }
             JSONObject emailID=new JSONObject();
             emailID.put("id",email);
             httpHandler.HttpPost(emailID);
@@ -72,7 +116,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
             JSONObject jsonObject=new JSONObject(reply);
             int success=jsonObject.getInt("suc");
             if(success==0) {
-                Message.toastMessage(getApplicationContext(), "ERROR: " + jsonObject.getString("msg"),"");
+                Message.toastMessage(getApplicationContext(), "Ops! Your internet connection is wonky!","");
                 return;
             }
             OTPReceived=jsonObject.getInt("msg");
@@ -125,6 +169,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             isEmailValid=false;
+                            Message.toastMessage(getApplicationContext(),"We couldn't verify your email ID!","");
                         }
                     });
         }

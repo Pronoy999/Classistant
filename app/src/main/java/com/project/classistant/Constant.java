@@ -29,6 +29,7 @@ abstract class Constant {
     final static String LOGIN_EMAIL="email";
     final static String IS_VALID="isValid";
     final static String MSG="msg";
+    final static String WHERE="where";
     //Student CONSTANTS
     final static String STUDENT_NAME="Student_Name";
     final static String STUDENT_ROLL="Student_Roll";

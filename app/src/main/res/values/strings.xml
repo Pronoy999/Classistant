@@ -7,7 +7,9 @@
     <string name="EnterName">Name</string>
     <string name="EnterPhone">Phone Number</string>
     <string name="EnterDepartment">Department</string>
-    <string name="EnterEmail">Email</string>
+    <string name="EnterRoll">University Roll Number</string>
+    <string name="EnterStream">Stream</string>
+    <string name="EnterEmail">e-mail ID</string>
     <string name="OTP_HINT">Enter the OTP here!</string>
     <string name="signup">SIGN UP</string>
     <string name="addsubjecttext">subject</string>
@@ -15,8 +17,9 @@
     <string name="saddsubjecttext">subject</string>
     <string name="time">  :  -  :  </string>
     <string name="teacherPassword">Password</string>
-    <string name="dob">Date of Birth</string>
+    <string name="dob">How young are you?</string>
     <string name="collegename">Institute Name</string>
     <string name="section">Class</string>
+    <string name="YearDisplay">Year</string>
 
 </resources>

@@ -87,13 +87,15 @@ public class FileController {
             fileOutputStream.write((Constant.STUDENT_EMAIL+":"+email+";").getBytes());
             fileOutputStream.write((Constant.STUDENT_PASSWORD+":"+passwordHash+";").getBytes());
             fileOutputStream.close();
-            JSONObject studentLogin=new JSONObject();
-            studentLogin.put(Constant.TYPE,Constant.TYPE_INSERT);
-            studentLogin.put(Constant.TABLE_NAME,Constant.LOGIN_METADATA);
-            studentLogin.put(Constant.ACCOUNT,Constant.ACCOUNT_STUDENT);
-            studentLogin.put(Constant.STUDENT_EMAIL,email);
-            studentLogin.put(Constant.PASSWORD_HASH,passwordHash);
-            syncCloud(studentLogin); //insert into LoginMetadata table.
+            JSONObject Login=new JSONObject();
+            JSONObject where=new JSONObject();//where clause.
+            Login.put(Constant.TYPE,Constant.TYPE_INSERT);
+            Login.put(Constant.TABLE_NAME,Constant.LOGIN_METADATA);
+            where.put(Constant.ACCOUNT,account);
+            where.put(Constant.LOGIN_EMAIL,email);
+            where.put(Constant.PASSWORD_HASH,passwordHash);
+            Login.put(Constant.WHERE,where);
+            syncCloud(Login); //insert into LoginMetadata table.
         }
         catch (IOException e){
             Message.logMessages("IOException: ",e.toString());

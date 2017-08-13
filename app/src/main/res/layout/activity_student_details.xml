@@ -24,7 +24,7 @@ android:padding="20dip">
 <EditText
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:hint="Name"
+    android:hint="@string/EnterName"
     android:layout_weight=".2"
     android:id="@+id/studentName">
     <requestFocus/>
@@ -33,7 +33,7 @@ android:padding="20dip">
 <EditText
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:hint="Roll Number"
+    android:hint="@string/EnterRoll"
     android:layout_weight=".2"
     android:inputType="number"
     android:id="@+id/studentRollNumber"/>
@@ -45,10 +45,18 @@ android:padding="20dip">
 <EditText
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:hint="e-mail id"
+    android:hint="@string/EnterEmail"
     android:layout_weight=".2"
     android:id="@+id/studentEmail"
     android:inputType="textEmailAddress"/>
+
+    <EditText
+        android:id="@+id/studentPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/teacherPassword"
+        android:inputType="textPassword" />
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -63,16 +71,11 @@ android:padding="20dip">
         android:id="@+id/collegename"
         android:inputType="text"
         android:hint="@string/collegename"/>
-<EditText
+
+    <EditText
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/studentPassword"
-    android:hint="@string/teacherPassword"
-    android:inputType="textPassword"/>
-<EditText
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:hint="Stream"
+    android:hint="@string/EnterStream"
     android:id="@+id/stream"/>
 <LinearLayout
     android:layout_width="match_parent"
@@ -83,7 +86,7 @@ android:padding="20dip">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Year"
+        android:text="@string/YearDisplay"
         android:layout_weight=".4"/>
     <EditText
         android:layout_width="wrap_content"
@@ -105,8 +108,8 @@ android:padding="20dip">
 </LinearLayout>
 <Button
     android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:text="Sign Up"
+    android:layout_height="wrap_content"
+    android:text="@string/signup"
     android:clickable="true"
     android:id="@+id/submitDetails"
     android:layout_weight="3.13" />
