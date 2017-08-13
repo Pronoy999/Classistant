@@ -58,7 +58,8 @@ public class FileController {
             data="";
             fileOutputStream.close();
             JSONObject studentValues=new JSONObject();
-            studentValues.put(Constant.TYPE,Constant.TYPE_INSERT_STUDENT_METADATA);
+            studentValues.put(Constant.TYPE,Constant.TYPE_INSERT);
+            studentValues.put(Constant.TABLE_NAME,Constant.TABLE_STUDENT_METADATA);
             studentValues.put(Constant.NAME_STUDENT,studentInfo.getString(Constant.STUDENT_NAME));
             studentValues.put(Constant.STUDENT_EMAIL,studentInfo.getString(Constant.STUDENT_EMAIL));
             studentValues.put(Constant.DATE_BIRTH_STUDENT,studentInfo.getString(Constant.DATE_BIRTH_STUDENT));
@@ -87,7 +88,8 @@ public class FileController {
             fileOutputStream.write((Constant.STUDENT_PASSWORD+":"+passwordHash+";").getBytes());
             fileOutputStream.close();
             JSONObject studentLogin=new JSONObject();
-            studentLogin.put(Constant.TYPE,Constant.TYPE_INSERT_LOGINMETADATA);
+            studentLogin.put(Constant.TYPE,Constant.TYPE_INSERT);
+            studentLogin.put(Constant.TABLE_NAME,Constant.LOGIN_METADATA);
             studentLogin.put(Constant.ACCOUNT,Constant.ACCOUNT_STUDENT);
             studentLogin.put(Constant.STUDENT_EMAIL,email);
             studentLogin.put(Constant.PASSWORD_HASH,passwordHash);

@@ -9,8 +9,9 @@ abstract class Constant {
     //JSON VALUES CONSTANT
     final static String URL_QUERY="http://classistant.esy.es/MyPhpProject2/Query.php";
     final static String TYPE="type";
-    final static String TYPE_INSERT_STUDENT_METADATA="insert_student_metadata";
-    final static String TYPE_INSERT_LOGINMETADATA="insert_login_metadata";
+    final static String TABLE_STUDENT_METADATA="insert_student_metadata";
+    final static String TABLE_LOGINMETADATA="insert_login_metadata";
+    final static String TYPE_INSERT="insert";
     final static String TYPE_UPDATE="update";
     final static String TYPE_SELECT="select";
     final static String PASSWORD_HASH="password_hash";
@@ -20,7 +21,7 @@ abstract class Constant {
     final static String VALUE="values";
     //Login Constants
     final static String LOGIN_FILENAME="LoginFile.dat";
-    final static String ACCOUNT="ACCOUNT";
+    final static String ACCOUNT="account";
     final static String ACCOUNT_FILENAME="ACCOUNT_DETAILS.dat";
     final static String ACCOUNT_STUDENT="STUDENT_ACCOUNT";
     final static String ACCOUNT_TEACHER="TEACHER_ACCOUNT";
