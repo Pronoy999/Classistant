@@ -3,6 +3,7 @@ package com.project.classistant;
 import android.content.Context;
 import android.os.Bundle;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -58,18 +59,35 @@ public class FileController {
             data="";
             fileOutputStream.close();
             JSONObject studentValues=new JSONObject();
+            JSONArray where=new JSONArray();
+            JSONArray values=new JSONArray();
+            where.put(Constant.NAME);
+            where.put(Constant.LOGIN_EMAIL);
+            where.put(Constant.PASSWORD_HASH);
+            where.put(Constant.ROLL_NUMBER);
+            where.put(Constant.DATE_BIRTH_STUDENT);
+            where.put(Constant.START_YEAR);
+            where.put(Constant.END_YEAR);
+            where.put(Constant.COLLEGE_NAME);
+            //where.put(Constant.BSSID);
+            where.put(Constant.STREAM);
+            where.put(Constant.SECTION);
             studentValues.put(Constant.TYPE,Constant.TYPE_INSERT);
             studentValues.put(Constant.TABLE_NAME,Constant.TABLE_STUDENT_METADATA);
-            studentValues.put(Constant.NAME_STUDENT,studentInfo.getString(Constant.STUDENT_NAME));
-            studentValues.put(Constant.STUDENT_EMAIL,studentInfo.getString(Constant.STUDENT_EMAIL));
-            studentValues.put(Constant.DATE_BIRTH_STUDENT,studentInfo.getString(Constant.DATE_BIRTH_STUDENT));
-            studentValues.put(Constant.PASSWORD_HASH,studentInfo.getString(Constant.STUDENT_PASSWORD));
-            studentValues.put(Constant.STUDENT_START_YR,studentInfo.getString(Constant.STUDENT_START_YR));
-            studentValues.put(Constant.STUDENT_END_YR,studentInfo.getString(Constant.STUDENT_END_YR));
-            studentValues.put(Constant.COLLEGE_NAME,studentInfo.getString(Constant.COLLEGE_NAME));
-            studentValues.put(Constant.BSSID,studentInfo.getString(Constant.BSSID));
-            studentValues.put(Constant.STUDENT_SECTION,studentInfo.getString(Constant.STUDENT_SECTION));
-            studentValues.put(Constant.STUDENT_STREAM,studentInfo.getString(Constant.STUDENT_STREAM));
+            values.put(studentInfo.getString(Constant.STUDENT_NAME));
+            values.put(studentInfo.getString(Constant.STUDENT_EMAIL));
+            values.put(studentInfo.getString(Constant.STUDENT_PASSWORD));
+            values.put(studentInfo.getString(Constant.STUDENT_ROLL));
+            values.put(studentInfo.getString(Constant.DATE_BIRTH_STUDENT));
+            values.put(studentInfo.getString(Constant.STUDENT_START_YR));
+            values.put(studentInfo.getString(Constant.STUDENT_END_YR));
+            values.put(studentInfo.getString(Constant.COLLEGE_NAME));
+            //values.put(studentInfo.getString(Constant.BSSID));
+            values.put(studentInfo.getString(Constant.STUDENT_STREAM));
+            values.put(studentInfo.getString(Constant.STUDENT_SECTION));
+            studentValues.put(Constant.WHERE,where);
+            studentValues.put(Constant.VALUE,values);
+            JSONObject object=QueryCreator.createQuery(studentValues);
             syncCloud(studentValues);//uploading the data to CLOUD.
         }
         catch (IOException e){
