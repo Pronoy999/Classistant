@@ -5,9 +5,9 @@ package com.project.classistant;
  */
 
 abstract class Constant {
-    final static String URL_EMAIL_CONFIRM = "http://classistant.esy.es/MyPhpProject2/confirmer.php";
+    final static String URL_EMAIL_CONFIRM = "http://classistant.esy.es/DataBaseManager/confirmer.php";
     //JSON VALUES CONSTANT
-    final static String URL_QUERY="http://classistant.esy.es/MyPhpProject2/Query.php";
+    final static String URL_QUERY="http://classistant.esy.es/DataBaseManager/query.php";
     final static String TYPE="type";
     final static String TABLE_STUDENT_METADATA="insert_student_metadata";
     final static String TABLE_LOGINMETADATA="insert_login_metadata";

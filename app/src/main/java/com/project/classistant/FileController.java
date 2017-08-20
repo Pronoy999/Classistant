@@ -88,7 +88,7 @@ public class FileController {
             studentValues.put(Constant.WHERE,where);
             studentValues.put(Constant.VALUE,values);
             JSONObject object=QueryCreator.createQuery(studentValues);
-            syncCloud(studentValues);//uploading the data to CLOUD.
+            syncCloud(object);//uploading the data to CLOUD.
         }
         catch (IOException e){
             Message.logMessages("IOException: ",e.toString());
@@ -113,7 +113,8 @@ public class FileController {
             where.put(Constant.LOGIN_EMAIL,email);
             where.put(Constant.PASSWORD_HASH,passwordHash);
             Login.put(Constant.WHERE,where);
-            syncCloud(Login); //insert into LoginMetadata table.
+            JSONObject object=QueryCreator.createQuery(Login);
+            syncCloud(object); //insert into LoginMetadata table.
         }
         catch (IOException e){
             Message.logMessages("IOException: ",e.toString());
