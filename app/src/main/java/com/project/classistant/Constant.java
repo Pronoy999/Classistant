@@ -57,8 +57,8 @@ abstract class Constant {
     static final String STUDENT_METADATA="STUDENT_METADATA";
     static final String UID = "_id";
     static final String NAME = "name";
-    static final String BSSID = "BSSID";
-    static final String SSID = "SSID";
+    static final String BSSID = "bssid";
+    static final String SSID = "ssid";
 
     static final String PASSWORD = "Password";
     static final String YEAR_IN="Year_In";
