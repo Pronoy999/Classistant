@@ -98,6 +98,9 @@ public class FileController {
         }
 
     }
+    public void createAccountTeacher(Bundle teacherInfo){
+        //TODO: ADD the teacher details.
+    }
     protected void createLoginDetails(String account,String email,String passwordHash){
         try{
             FileOutputStream fileOutputStream=context.openFileOutput(Constant.LOGIN_FILENAME,Context.MODE_PRIVATE);
