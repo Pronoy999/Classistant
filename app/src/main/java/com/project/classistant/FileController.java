@@ -74,7 +74,7 @@ public class FileController {
             where.put(Constant.START_YEAR);
             where.put(Constant.END_YEAR);
             where.put(Constant.COLLEGE_NAME);
-            //where.put(Constant.BSSID);
+            where.put(Constant.BSSID);
             where.put(Constant.STREAM);
             where.put(Constant.SECTION);
             studentValues.put(Constant.TYPE, Constant.TYPE_INSERT);
@@ -115,12 +115,18 @@ public class FileController {
             fileOutputStream.close();
             JSONObject Login = new JSONObject();
             JSONObject where = new JSONObject();//where clause.
+            JSONObject values=new JSONObject();
             Login.put(Constant.TYPE, Constant.TYPE_INSERT);
             Login.put(Constant.TABLE_NAME, Constant.LOGIN_METADATA);
-            where.put(Constant.ACCOUNT, account);
-            where.put(Constant.LOGIN_EMAIL, email);
-            where.put(Constant.PASSWORD_HASH, passwordHash);
+            values.put(Constant.ACCOUNT, account);
+            values.put(Constant.LOGIN_EMAIL, email);
+            values.put(Constant.PASSWORD_HASH, passwordHash);
+
+            where.put(Constant.ACCOUNT,Constant.ACCOUNT);
+            where.put(Constant.LOGIN_EMAIL,Constant.LOGIN_EMAIL);
+            where.put(Constant.PASSWORD_HASH,Constant.PASSWORD_HASH);
             Login.put(Constant.WHERE, where);
+            Login.put(Constant.VALUE,values);
             JSONObject object = QueryCreator.createQuery(Login);
             CloudSync cloudSync = new CloudSync();
             String arr[] = {Constant.CHOICE_SYNC_CLOUD + "", object.toString()};
