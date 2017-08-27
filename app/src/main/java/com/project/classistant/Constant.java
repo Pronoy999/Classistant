@@ -11,6 +11,8 @@ abstract class Constant {
     final static String TYPE="type";
     final static String TABLE_STUDENT_METADATA="insert_student_metadata";
     final static String TABLE_LOGINMETADATA="insert_login_metadata";
+
+    final static String TYPE_CREATE="CREATE";
     final static String TYPE_INSERT="INSERT";
     final static String TYPE_UPDATE="UPDATE";
     final static String TYPE_SELECT="SELECT";
@@ -58,6 +60,9 @@ abstract class Constant {
     static final String LOGIN_METADATA="LOGIN_METADATA";
     static final String TEACHER_METADATA="TEACHER_METADATA";
     static final String STUDENT_METADATA="STUDENT_METADATA";
+    static final String TEACHER_TABLE="TEACHER_TABLE";
+    static final String STUDENT_TABLE="STUDENT_TABLE";
+
     static final String UID = "_id";
     static final String NAME = "name";
     static final String BSSID = "bssid";

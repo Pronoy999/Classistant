@@ -44,6 +44,7 @@ public class DatabaseController{
                 +Constant.BSSID + " VARCHAR(255),"
                 +Constant.PASSWORD +" VARCHAR(255),"
                 +Constant.ATTENDANCE +" INT,"
+                +Constant.TOTAL_ATTENDANCE+" INT,"
                 +Constant.YEAR_IN +" INT,"
                 +Constant.YEAR_OUT +" INT);";
 
