@@ -16,6 +16,9 @@ abstract class Constant {
     final static String TYPE_SELECT="SELECT";
     final static String VALUE="values";
     final static String QUERY="query";
+    final static String QUERY_REPLY="query_reply";
+    final static int CHOICE_SYNC_CLOUD=1;
+    final static int CHOICE_GET_CLOUDATA=2;
     //Login Constants
     final static String LOGIN_FILENAME="LoginFile.dat";
     final static String ACCOUNT="account";
@@ -25,7 +28,7 @@ abstract class Constant {
     final static String ACCOUNT_LOGGEDIN="";
     final static String LOGIN_EMAIL="email";
     final static String IS_VALID="isValid";
-    final static String MSG="msg";
+    final static String ERROR_MSG="err_msg";
     final static String WHERE="where";
     //Student CONSTANTS
     final static String STUDENT_NAME="Student_Name";
