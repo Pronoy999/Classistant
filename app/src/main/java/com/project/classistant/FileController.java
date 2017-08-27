@@ -12,7 +12,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URL;
 import java.util.Scanner;
 
 /**
@@ -21,7 +20,7 @@ import java.util.Scanner;
 
 public class FileController {
     Context context;
-    Boolean isLoginValid=false;
+    Boolean isLoginValid = false;
 
     public FileController(Context context) {
         this.context = context;
@@ -123,7 +122,9 @@ public class FileController {
             where.put(Constant.PASSWORD_HASH, passwordHash);
             Login.put(Constant.WHERE, where);
             JSONObject object = QueryCreator.createQuery(Login);
-            syncCloud(object); //insert into LoginMetadata table.
+            CloudSync cloudSync = new CloudSync();
+            String arr[] = {Constant.CHOICE_SYNC_CLOUD + "", object.toString()};
+            cloudSync.execute(arr);// Insert into Login Metadata.
         } catch (IOException e) {
             Message.logMessages("IOException: ", e.toString());
         } catch (Exception e) {
@@ -161,9 +162,9 @@ public class FileController {
                 loginCheck.put(Constant.LOGIN_EMAIL, email);
                 loginCheck.put(Constant.PASSWORD_HASH, passwordHash);
                 loginCheck.put(Constant.ACCOUNT, account);
-                JSONObject queryObject=QueryCreator.createQuery(loginCheck);
-                CloudSync cloudSync=new CloudSync();
-                String arr[]={Constant.CHOICE_GET_CLOUDATA+"",queryObject.toString()};
+                JSONObject queryObject = QueryCreator.createQuery(loginCheck);
+                CloudSync cloudSync = new CloudSync();
+                String arr[] = {Constant.CHOICE_GET_CLOUDATA + "", queryObject.toString()};
                 cloudSync.execute(arr);
                 return isLoginValid;
             }
@@ -199,21 +200,22 @@ public class FileController {
 
     public class CloudSync extends AsyncTask<String, Void, String> {
         int choice;
+
         @Override
         protected String doInBackground(String... data) {
-            String returnData="";
-            int ch = Integer.parseInt(data[0]);
-            choice=ch;
+            String returnData = "";
+            choice = Integer.parseInt(data[0]);
             try {
-                switch (ch) {
-                    case 1: syncCloud(new JSONObject(data[1]));
-                            break;
-                    case 2: returnData=getDataCloud(new JSONObject(data[1]));
-                            break;
+                switch (choice) {
+                    case 1:
+                        syncCloud(new JSONObject(data[1]));
+                        break;
+                    case 2:
+                        returnData = getDataCloud(new JSONObject(data[1]));
+                        break;
                 }
-            }
-            catch (JSONException e){
-                Message.logMessages("ERROR: ",e.toString());
+            } catch (JSONException e) {
+                Message.logMessages("ERROR: ", e.toString());
             }
             return returnData;
         }
@@ -230,17 +232,15 @@ public class FileController {
                             JSONArray array = jsonArray.getJSONArray(0);
                             int id = Integer.parseInt(array.getString(0));
                             if (id > 0) {
-                                isLoginValid=true;
+                                isLoginValid = true;
                             } else {
                                 Message.toastMessage(context, "ERROR.", "");
                             }
                         }
                 }
-            }
-            catch (JSONException e){
-                Message.logMessages("ERROR: ",e.toString());
+            } catch (JSONException e) {
+                Message.logMessages("ERROR: ", e.toString());
             }
         }
     }
 }
-
