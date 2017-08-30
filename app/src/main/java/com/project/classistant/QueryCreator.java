@@ -87,11 +87,23 @@ class QueryCreator {
                                 "'" + value.get(valPos).toString() + "')";//account
                     }
                     break;
-                case Constant.TYPE_CREATE:
-                    /*if(table.equals(Constant.TEACHER_TABLE)){
-                    query="CREATE TABLE "+table+" ("+
-
-                    }*/
+                case Constant.TYPE_CREATE://Teacher Table creation query to server
+                    if(table.equals(Constant.TEACHER_TABLE)){
+                    query="CREATE TABLE "+table+" ("
+                            +Constant.STUDENT_ID+" +varchar(255),"
+                            +Constant.SUBJECT+" varchar(255),"
+                            +Constant.CLASS+" varchar(255),"
+                            +Constant.ATTENDANCE+" tinyint,"
+                            +Constant.TOTAL_ATTENDANCE+" tinyint);";
+                    }
+                    //Student Table creation query to server
+                    if(table.equals(Constant.STUDENT_TABLE)){
+                        query="CREATE TABLE "+table+" ("
+                                +Constant.SUBJECT+" varchar(255),"
+                                +Constant.ATTENDANCE+" tinyint,"
+                                +Constant.TOTAL_ATTENDANCE+" tinyint,"
+                                +Constant.TEACHER_ID+" varchar(255));";
+                    }
                     break;
                 case Constant.TYPE_UPDATE:
                     break;

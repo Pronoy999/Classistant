@@ -87,6 +87,15 @@ abstract class Constant {
     static final String ROLL_NUMBER = "Roll_Number";
 
 
+    //Server Teacher Table Constants
+    static final String STUDENT_ID="Student_ID";
+    //static final String SUBJECT="SUBJECT";
+    static final String CLASS="Class";
+    //static final String ATTENDANCE = "Attendance";
+    //static final String TOTAL_ATTENDANCE="Total_Attendance";
+
+
+
     static DatabaseController databaseController;/* Initialize this in the home activity.
                                                         Use this object to call any method of database.*/
     static final int PASSWORD_DIALOG=10;
