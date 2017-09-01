@@ -110,7 +110,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
                 return;
             }
             JSONObject emailID=new JSONObject();
-            emailID.put("id",email);
+            emailID.put(Constant.EMAIL_ID_CONFIRM,email);
             httpHandler.HttpPost(emailID);
             String reply=httpHandler.getReplyData();
             JSONObject jsonObject=new JSONObject(reply);

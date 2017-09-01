@@ -11,6 +11,7 @@ abstract class Constant {
     final static String TYPE="type";
     final static String TABLE_STUDENT_METADATA="insert_student_metadata";
     final static String TABLE_LOGINMETADATA="insert_login_metadata";
+    final static String EMAIL_ID_CONFIRM="id";
 
     final static String TYPE_CREATE="CREATE";
     final static String TYPE_INSERT="INSERT";

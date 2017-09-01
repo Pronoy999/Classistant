@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Scanner;
@@ -103,7 +104,34 @@ public class FileController {
     }
 
     public void createAccountTeacher(Bundle teacherInfo) {
-        //TODO: ADD the teacher details.
+        String data="";
+        try{
+            FileOutputStream fileOutputStream=context.openFileOutput(Constant.ACCOUNT_FILENAME,Context.MODE_PRIVATE);
+            data=Constant.TEACHER_NAME+":";
+            data+=teacherInfo.getString(Constant.TEACHER_NAME)+";";
+            fileOutputStream.write(data.getBytes());
+            data="";
+            data=Constant.TEACHER_PHONE+":";
+            data+=teacherInfo.getString(Constant.TEACHER_PHONE)+";";
+            fileOutputStream.write(data.getBytes());
+            data="";
+            data=Constant.TEACHER_EMAIL+":";
+            data+=teacherInfo.getString(Constant.TEACHER_EMAIL)+";";
+            fileOutputStream.write(data.getBytes());
+            data="";
+            data=Constant.PASSWORD_HASH+":";
+            data+=teacherInfo.getString(Constant.PASSWORD_HASH)+";";
+            fileOutputStream.write(data.getBytes());
+            data="";
+            data=Constant.TEACHER_DEPT+":";
+            data+=teacherInfo.getString(Constant.TEACHER_DEPT)+";";
+            fileOutputStream.write(data.getBytes());
+            data="";
+            //TODO: Insert to Teacher_MetaData.
+        }
+        catch (IOException e){
+            Message.logMessages("ERROR: ",e.toString());
+        }
     }
 
     protected void createLoginDetails(String account, String email, String passwordHash) {
@@ -202,8 +230,23 @@ public class FileController {
             Message.logMessages("ERROR: ", e.toString());
         }
         return reply;
-    }
-
+    }/*
+    private boolean isLoginValid(JSONObject jsonObject){
+        try {
+            JSONArray jsonArray = jsonObject.getJSONArray(Constant.QUERY_REPLY);
+            JSONArray array = jsonArray.getJSONArray(0);
+            int id = Integer.parseInt(array.getString(0));
+            if (id > 0) {
+                return true;
+            } else {
+                Message.toastMessage(context, "ERROR.", "");
+            }
+        }
+        catch (JSONException e){
+            Message.logMessages("ERROR: ",e.toString());
+        }
+        return false;
+    }*/
     public class CloudSync extends AsyncTask<String, Void, String> {
         int choice;
 
