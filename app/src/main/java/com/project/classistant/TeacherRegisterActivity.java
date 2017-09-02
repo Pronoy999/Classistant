@@ -2,6 +2,7 @@ package com.project.classistant;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -102,6 +103,15 @@ public class TeacherRegisterActivity extends AppCompatActivity {
     }
     public class InternetConnect extends AsyncTask<String,Void,Void>{
         String data="";
+        private ProgressDialog progressDialog;
+        @Override
+        protected void onPreExecute() {
+            progressDialog = new ProgressDialog(getApplicationContext());
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressDialog.setCancelable(false);
+            progressDialog.setMessage("Loading...");
+            progressDialog.show();
+        }
 
         @Override
         protected Void doInBackground(String... strings) {
@@ -131,6 +141,7 @@ public class TeacherRegisterActivity extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             //End the Progress Dialog.
+            progressDialog.dismiss();
         }
     }
 

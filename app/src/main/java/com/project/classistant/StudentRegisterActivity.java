@@ -2,6 +2,7 @@ package com.project.classistant;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -106,7 +107,8 @@ public class StudentRegisterActivity extends AppCompatActivity {
         //send the OTP to the Email Code.
         String arr[]={email};
         ConnectInternet connectInternet=new ConnectInternet();
-        //Start the Progress Dialog.
+        //Start the Progress Dialog
+
         connectInternet.execute(arr);
         showDialog(Constant.OTP_DIALOG);
         if(isEmailValid) {
@@ -164,6 +166,15 @@ public class StudentRegisterActivity extends AppCompatActivity {
     }
     public class ConnectInternet extends AsyncTask<String,Void,Void>{
         String reply="";
+        private ProgressDialog progressDialog;
+        @Override
+        protected void onPreExecute() {
+            progressDialog = new ProgressDialog(getApplicationContext());
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressDialog.setCancelable(false);
+            progressDialog.setMessage("Please wait");
+            progressDialog.show();
+        }
 
         @Override
         protected Void doInBackground(String... strings) {
@@ -195,6 +206,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             //Stop the dialog here.
+            progressDialog.dismiss();
         }
     }
 }
