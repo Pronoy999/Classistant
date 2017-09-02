@@ -192,7 +192,13 @@ public class FileController {
             fileOutputStream.close();
             JSONObject Login = new JSONObject();
             JSONObject where = new JSONObject();//where clause.
-            JSONObject values=new JSONObject(); //values.
+            JSONObject values=new JSONObject(); //values
+            if(account.equals(Constant.ACCOUNT_TEACHER)){
+                account="T";
+            }
+            else if(account.equals(Constant.ACCOUNT_STUDENT)){
+                account="S";
+            }
             Login.put(Constant.TYPE, Constant.TYPE_INSERT);
             Login.put(Constant.TABLE_NAME, Constant.LOGIN_METADATA);
             values.put(Constant.ACCOUNT, account);
