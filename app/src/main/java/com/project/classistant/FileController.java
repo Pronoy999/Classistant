@@ -103,7 +103,39 @@ public class FileController {
     }
 
     public void createAccountTeacher(Bundle teacherInfo) {
-        //TODO:Create Teacher Account.
+        String data="";
+        try{
+            FileOutputStream fileOutputStream=context.openFileOutput(Constant.ACCOUNT_FILENAME,Context.MODE_PRIVATE);
+            data=Constant.TEACHER_NAME+":";
+            data+=teacherInfo.getString(Constant.TABLE_NAME)+";";
+            fileOutputStream.write(data.getBytes());
+            data="";
+            data=Constant.TEACHER_PHONE+":";
+            data+=teacherInfo.getString(Constant.TEACHER_PHONE)+";";
+            fileOutputStream.write(data.getBytes());
+            data="";
+            data=Constant.TEACHER_EMAIL+":";
+            data+=teacherInfo.getString(Constant.TEACHER_EMAIL)+";";
+            fileOutputStream.write(data.getBytes());
+            data="";
+            data=Constant.PASSWORD_HASH+":";
+            data+=teacherInfo.getString(Constant.PASSWORD_HASH)+";";
+            fileOutputStream.write(data.getBytes());
+            data="";
+            data=Constant.TEACHER_DEPT+":";
+            data+=teacherInfo.getString(Constant.TEACHER_DEPT)+";";
+            fileOutputStream.write(data.getBytes());
+            data="";
+            data=Constant.TEACHER_COLLEGE_NAME+":";
+            data+=teacherInfo.getString(Constant.TEACHER_COLLEGE_NAME)+";";
+            fileOutputStream.write(data.getBytes());
+            fileOutputStream.close();// closing the File OutputStream.
+            //TODO: Sync data to cloud.
+
+        }
+        catch (IOException e){
+            Message.logMessages("ERROR: ",e.toString());
+        }
     }
 
     protected void createLoginDetails(String account, String email, String passwordHash) {

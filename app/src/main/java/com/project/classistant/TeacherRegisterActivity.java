@@ -27,18 +27,44 @@ public class TeacherRegisterActivity extends AppCompatActivity {
         });
     }
     private void takeData(){
-        String name,phoneNo,email,password,dept;
+        String name,phoneNo,email,password,dept,clgName;
         EditText editText;
         editText=(EditText) findViewById(R.id.teacherName);
         name=editText.getText().toString();
+        if(name.equals("")|| name.isEmpty()){
+            Message.toastMessage(getApplicationContext(),"Please provide your name!","");
+            return;
+        }
         editText=(EditText) findViewById(R.id.teacherPhone);
         phoneNo=editText.getText().toString();
+        if (phoneNo.isEmpty() || phoneNo.equals("")){
+            Message.toastMessage(getApplicationContext(),"Please provide the phone number so that students can connect you","");
+            return;
+        }
         editText=(EditText) findViewById(R.id.teacherEmail);
         email=editText.getText().toString();
+        if (email.isEmpty() || email.equals("")){
+            Message.toastMessage(getApplicationContext(),"Please provide the email!","");
+            return;
+        }
         editText=(EditText) findViewById(R.id.teacherPassword);
         password=editText.getText().toString();
+        if (password.equals("") || password.isEmpty()){
+            Message.toastMessage(getApplicationContext(),"Please provide a password!","");
+            return;
+        }
         editText=(EditText) findViewById(R.id.teacherDepartment);
         dept=editText.getText().toString();
+        if(dept.isEmpty() || dept.equals("")){
+            Message.toastMessage(getApplicationContext(),"Please Provide your department!","");
+            return;
+        }
+        editText=(EditText) findViewById(R.id.collegename);
+        clgName=editText.getText().toString();
+        if(clgName.equals("")||clgName.isEmpty()){
+            Message.toastMessage(getApplicationContext(),"Please provide your Institute Name","");
+            return;
+        }
         if(!ValidityChecker.checkValidityEmail(email)){
             Message.toastMessage(getApplicationContext(),"Please enter a valid Email ID!","");
             setNull(R.id.teacherEmail);
@@ -50,6 +76,8 @@ public class TeacherRegisterActivity extends AppCompatActivity {
             showDialog(Constant.PASSWORD_DIALOG);
             return;
         }
+        HashMaker hashMaker=new HashMaker("SHA-256");  // Making the hash of the password.
+        password=hashMaker.getHash(password);
         String arr[]={email};
         InternetConnect internetConnect=new InternetConnect();
         internetConnect.execute(arr);
@@ -62,6 +90,7 @@ public class TeacherRegisterActivity extends AppCompatActivity {
             teacherData.putString(Constant.TEACHER_EMAIL,email);
             teacherData.putString(Constant.PASSWORD_HASH,password);
             teacherData.putString(Constant.TEACHER_DEPT,dept);
+            teacherData.putString(Constant.TEACHER_COLLEGE_NAME,clgName);
             FileController fileController=new FileController(getApplicationContext());
             fileController.createAccountTeacher(teacherData);//Writing the data in the file.
         }
