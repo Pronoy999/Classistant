@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="false"
@@ -28,7 +28,8 @@
         <activity android:name=".StudentMainActivity" />
         <activity android:name=".TeacherRegisterActivity" />
         <activity android:name=".TeacherMainActivity" />
-        <activity android:name=".LoginActivity"/>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".TakeNotesActivity"></activity>
     </application>
 
 </manifest>
