@@ -3,6 +3,7 @@ package com.project.classistant;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -103,28 +104,10 @@ public class StudentRegisterActivity extends AppCompatActivity {
             return;
         }
         //send the OTP to the Email Code.
-        try {
-            HTTPHandler httpHandler = new HTTPHandler(Constant.URL_EMAIL_CONFIRM, 10000, true, true, "POST");
-            if(!httpHandler.isReachable()){
-                Message.toastMessage(getApplicationContext(),"Ops! Your internet connection is wonky!","");
-                return;
-            }
-            JSONObject emailID=new JSONObject();
-            emailID.put(Constant.EMAIL_ID_CONFIRM,email);
-            httpHandler.HttpPost(emailID);
-            String reply=httpHandler.getReplyData();
-            JSONObject jsonObject=new JSONObject(reply);
-            int success=jsonObject.getInt("suc");
-            if(success==0) {
-                Message.toastMessage(getApplicationContext(), "Ops! Your internet connection is wonky!","");
-                return;
-            }
-            OTPReceived=jsonObject.getInt("msg");
-            showDialog(Constant.OTP_DIALOG);
-        }
-        catch (Exception e){
-            Message.logMessages("ERROR: ",e.toString());
-        }
+        String arr[]={email};
+        ConnectInternet connectInternet=new ConnectInternet();
+        //Start the Progress Dialog.
+        connectInternet.execute(arr);
         showDialog(Constant.OTP_DIALOG);
         if(isEmailValid) {
             Bundle studentDetails = new Bundle();
@@ -178,5 +161,40 @@ public class StudentRegisterActivity extends AppCompatActivity {
     private void setNull(int id){
         EditText editText=(EditText) findViewById(id);
         editText.getText().clear();
+    }
+    public class ConnectInternet extends AsyncTask<String,Void,Void>{
+        String reply="";
+
+        @Override
+        protected Void doInBackground(String... strings) {
+            try {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put(Constant.EMAIL_ID_CONFIRM, strings[0]);
+                HTTPHandler httpHandler=new HTTPHandler(Constant.URL_EMAIL_CONFIRM,10000,true,true,"POST");
+                if(httpHandler.isReachable()) {
+                    httpHandler.HttpPost(jsonObject);
+                    reply = httpHandler.getReplyData();
+                    JSONObject jsonRepy = new JSONObject(reply);
+                    if (jsonRepy.getInt("suc") == 0) {
+                        Message.toastMessage(getApplicationContext(), "Your Internet Connection is Wonky!", "");
+                    } else {
+                        OTPReceived = jsonRepy.getInt("msg");
+                    }
+                }
+                else {
+                    Message.toastMessage(getApplicationContext(), "Please connect to an Internet source!", "long");
+                }
+            }
+            catch (Exception e){
+                Message.logMessages("ERROR: ",e.toString());
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            //Stop the dialog here.
+        }
     }
 }
