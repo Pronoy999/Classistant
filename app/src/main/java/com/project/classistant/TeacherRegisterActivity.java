@@ -94,6 +94,8 @@ public class TeacherRegisterActivity extends AppCompatActivity {
             teacherData.putString(Constant.TEACHER_COLLEGE_NAME,clgName);
             FileController fileController=new FileController(getApplicationContext());
             fileController.createAccountTeacher(teacherData);//Writing the data in the file.
+            fileController.createLoginDetails(Constant.ACCOUNT_TEACHER,email,password);
+            ActivityChanger.changeActivity(this,"AddSubjectTeacherActivity");
         }
 
     }

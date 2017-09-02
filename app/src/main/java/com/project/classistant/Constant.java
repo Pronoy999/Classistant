@@ -37,6 +37,7 @@ abstract class Constant {
     final static String STUDENT_NAME="Student_Name";
     final static String STUDENT_ROLL="Student_Roll";
     final static String STUDENT_EMAIL="Student_Email";
+    final static String STUDENT_EMAIL_VALUE="";
     final static String STUDENT_PASSWORD="Student_Password";
     final static String STUDENT_STREAM="Student_Stream";
     final static String STUDENT_SECTION="Student_Section";
@@ -47,6 +48,7 @@ abstract class Constant {
     // Teacher CONSTANTS
     final static String TEACHER_NAME="Teacher_Name";
     final static String TEACHER_EMAIL="Teacher_email";
+    static String TEACHER_EMAIL_VALUE="";
     final static String TEACHER_PASSWORD="Teacher_Password";
     final static String TEACHER_PHONE="Teacher_phone";
     final static String TEACHER_COLLEGE_NAME="Teacher_college_name";
@@ -91,7 +93,7 @@ abstract class Constant {
     //Server Teacher Table Constants
     static final String STUDENT_ID="Student_ID";
     //static final String SUBJECT="SUBJECT";
-    static final String CLASS="Class";
+    static final String _STREAM="Class";
     //static final String ATTENDANCE = "Attendance";
     //static final String TOTAL_ATTENDANCE="Total_Attendance";
 

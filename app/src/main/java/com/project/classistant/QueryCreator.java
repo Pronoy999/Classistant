@@ -81,6 +81,7 @@ class QueryCreator {
                                 where.get(wherePos++).toString() + ", " +//email
                                 where.get(wherePos++).toString() + ", " +//password-hash
                                 where.get(wherePos).toString() + ") " +//account
+                                //TODO: Account is only char(1)
                                 "VALUES (" +
                                 "'" + value.get(valPos++).toString() + "', " +//email
                                 "'" + value.get(valPos++).toString() + "', " +//password-hash
@@ -92,7 +93,7 @@ class QueryCreator {
                     query="CREATE TABLE "+table+" ("
                             +Constant.STUDENT_ID+" +varchar(255),"
                             +Constant.SUBJECT+" varchar(255),"
-                            +Constant.CLASS+" varchar(255),"
+                            +Constant._STREAM +" varchar(255),"
                             +Constant.ATTENDANCE+" tinyint,"
                             +Constant.TOTAL_ATTENDANCE+" tinyint);";
                     }
