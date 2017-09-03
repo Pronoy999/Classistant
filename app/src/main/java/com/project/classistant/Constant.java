@@ -102,4 +102,7 @@ abstract class Constant {
     static DatabaseController databaseController;/* Initialize this in the home activity.
                                                         Use this object to call any method of database.*/
     static final int PASSWORD_DIALOG=10;
+    //EXCEL CONSTANTS
+    final static String EXCEL_FILE_NAME="Attendance.xls";
+    final static String EXCEL_SHEET_NAME="SHEET1";
 }
